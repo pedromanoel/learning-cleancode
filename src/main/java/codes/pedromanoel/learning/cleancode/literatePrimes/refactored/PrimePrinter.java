@@ -1,4 +1,4 @@
-package codes.pedromanoel.learning.cleancode;
+package codes.pedromanoel.learning.cleancode.literatePrimes.refactored;
 
 public class PrimePrinter {
     public static void main(String[] args) {
