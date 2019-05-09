@@ -3,11 +3,58 @@
  */
 package codes.pedromanoel.learning.cleancode;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class PrintPrimesTest {
-    @Test public void main() {
+import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.net.URL;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
+
+class PrintPrimesTest {
+
+    private ByteArrayOutputStream outputStream;
+    private PrintStream printStream;
+
+    @BeforeEach
+    void setUp() {
+        replaceStdOutWithByteArrayOutuputStream();
+    }
+
+    @AfterEach
+    void tearDown() {
+        restoreStdOut();
+    }
+
+    @Test
+    void print_primes_to_stdout() {
         PrintPrimes.main(new String[]{});
+
+        assertThat(output()).isEqualTo(contentOf(primesFixture()));
+    }
+
+    private void replaceStdOutWithByteArrayOutuputStream() {
+        outputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(outputStream);
+
+        System.setOut(printStream);
+    }
+
+    private void restoreStdOut() {
+        printStream.close();
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+    }
+
+    private String output() {
+        return outputStream.toString();
+    }
+
+    private URL primesFixture() {
+        return getClass().getClassLoader().getResource("primes.txt");
     }
 }

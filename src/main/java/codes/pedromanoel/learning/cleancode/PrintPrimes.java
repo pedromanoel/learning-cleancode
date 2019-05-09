@@ -3,7 +3,7 @@
  */
 package codes.pedromanoel.learning.cleancode;
 
-public class PrintPrimes {
+class PrintPrimes {
     public static void main(String[] args) {
         final int M = 1000;
         final int RR = 50;
