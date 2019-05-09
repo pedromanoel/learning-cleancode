@@ -33,7 +33,7 @@ class PrintPrimesTest {
 
     @Test
     void print_primes_to_stdout() {
-        PrintPrimes.main(new String[]{});
+        new PrintPrimes().run();
 
         assertThat(output()).isEqualTo(contentOf(primesFixture()));
     }

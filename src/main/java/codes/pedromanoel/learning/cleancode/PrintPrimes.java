@@ -5,6 +5,10 @@ package codes.pedromanoel.learning.cleancode;
 
 class PrintPrimes {
     public static void main(String[] args) {
+        new PrintPrimes().run();
+    }
+
+    public void run() {
         final int M = 1000;
         final int RR = 50;
         final int CC = 4;
