@@ -38,6 +38,13 @@ class PrintPrimesTest {
         assertThat(output()).isEqualTo(contentOf(primesFixture()));
     }
 
+    @Test
+    void primes_printer_prints_to_stdout() {
+        PrimePrinter.main(null);
+
+        assertThat(output()).isEqualTo(contentOf(primesFixture()));
+    }
+
     private void replaceStdOutWithByteArrayOutuputStream() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
