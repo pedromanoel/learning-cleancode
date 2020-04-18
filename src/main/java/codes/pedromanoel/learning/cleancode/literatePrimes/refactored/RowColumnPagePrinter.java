@@ -23,18 +23,21 @@ public class RowColumnPagePrinter {
         for (int firstIndexOnPage = 0;
              firstIndexOnPage < data.length;
              firstIndexOnPage += numbersPerPage) {
-            int lastIndexOnPage = Math
-                    .min(firstIndexOnPage + numbersPerPage - 1, data.length - 1);
-
-            printPageHeader(pageHeader, pageNumber);
-            printPage(firstIndexOnPage, lastIndexOnPage, data);
-            printStream.println("\f");
-            pageNumber++;
+            printPage(data, pageNumber++, firstIndexOnPage);
         }
 
     }
 
-    private void printPage(int firstIndexOnPage, int lastIndexOnPage, int[] data) {
+    private void printPage(int[] data, int pageNumber, int firstIndexOnPage) {
+        int lastIndexOnPage = Math
+                .min(firstIndexOnPage + numbersPerPage - 1, data.length - 1);
+
+        printPageHeader(pageHeader, pageNumber);
+        printPageContent(firstIndexOnPage, lastIndexOnPage, data);
+        printStream.println("\f");
+    }
+
+    private void printPageContent(int firstIndexOnPage, int lastIndexOnPage, int[] data) {
         int firstIndexOfLastRowOnPage = firstIndexOnPage + rowsPerPage - 1;
         for (int firstIndexInRow = firstIndexOnPage;
              firstIndexInRow <= firstIndexOfLastRowOnPage;
